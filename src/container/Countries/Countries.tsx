@@ -1,8 +1,8 @@
 import { CountryInfoBrief } from '../../types.d';
+import { getCountries } from '../../lib/restcountries-api';
 import { useCallback, useEffect, useState } from 'react';
 import CountriesList from '../../components/CountriesList/CountriesList';
 import CountryDetails from '../../components/CountryDetails/CountryDetails';
-import { getCountries } from '../../lib/restcountries-api';
 import Preloader from '../../components/Preloader/Preloader';
 
 export const Countries = () => {

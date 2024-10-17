@@ -1,4 +1,4 @@
-import { CountryInfoDetailed, WeatherInfo } from '../../types';
+import { CountryInfoDetailed, WeatherInfo } from '../../types.d';
 import { getCountryDetails } from '../../lib/restcountries-api';
 import { getWeather } from '../../lib/openweather-api';
 import numeral from 'numeral';
