@@ -7,9 +7,11 @@ import WeatherDetails from './WeatherDetails.tsx/WeatherDetails';
 
 interface CountryDetailsProps {
   alpha3: string | null;
+  onLoading: () => void;
+  onLoaded: () => void;
 }
 
-const CountryDetails: FC<CountryDetailsProps> = ({ alpha3 }) => {
+const CountryDetails: FC<CountryDetailsProps> = ({ alpha3, onLoading, onLoaded }) => {
   const [details, setDetails] = useState<CountryInfoDetailed>();
   const [neighborsDetails, setNeighborsDetails] = useState<CountryInfoDetailed[]>([]);
   const [capitalWeather, setCapitalWeather] = useState<WeatherInfo>();
@@ -21,19 +23,24 @@ const CountryDetails: FC<CountryDetailsProps> = ({ alpha3 }) => {
 
     const fetchData = async () => {
       try {
+        onLoading();
+
         const data = await getCountryDetails(alpha3);
         setDetails(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        onLoaded();
       }
     };
 
     fetchData();
-  }, [alpha3]);
+  }, [alpha3, onLoading, onLoaded]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        onLoading();
         setNeighborsDetails([]);
 
         if (details?.borders) {
@@ -42,15 +49,18 @@ const CountryDetails: FC<CountryDetailsProps> = ({ alpha3 }) => {
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        onLoaded();
       }
     };
 
     fetchData();
-  }, [details]);
+  }, [details, onLoading, onLoaded]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        onLoading();
         setCapitalWeather(undefined);
 
         if (details) {
@@ -59,11 +69,13 @@ const CountryDetails: FC<CountryDetailsProps> = ({ alpha3 }) => {
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        onLoaded();
       }
     };
 
     fetchData();
-  }, [details]);
+  }, [details, onLoading, onLoaded]);
 
   return (
     <div>

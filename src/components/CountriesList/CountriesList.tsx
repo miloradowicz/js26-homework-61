@@ -4,6 +4,8 @@ import { FC } from 'react';
 interface CountriesListProps {
   countries: CountryInfoBrief[];
   onChange: (_: string) => void;
+  onLoading: () => void;
+  onLoaded: () => void;
 }
 
 const CountriesList: FC<CountriesListProps> = ({ countries, onChange }) => {
