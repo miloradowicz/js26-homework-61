@@ -34,11 +34,11 @@ const CountryDetails: FC<CountryDetailsProps> = ({ alpha3 }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setNeighborsDetails([]);
+
         if (details?.borders) {
           const data = await Promise.all(details.borders.map((x) => getCountryDetails(x)));
           setNeighborsDetails(data);
-        } else {
-          setNeighborsDetails([]);
         }
       } catch (err) {
         console.error(err);
@@ -51,6 +51,8 @@ const CountryDetails: FC<CountryDetailsProps> = ({ alpha3 }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setCapitalWeather(undefined);
+
         if (details) {
           const data = await getWeather(details.capital, details.alpha3Code);
           setCapitalWeather(data);
