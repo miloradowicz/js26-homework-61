@@ -17,18 +17,19 @@ export interface CountryInfoDetailed {
   alpha3Code: string;
   capital: string;
   population: number;
-  borders: string[];
+  borders?: string[];
   flags: { svg: string; png: string };
   flag: string;
 }
 
 export const getCountries = async () => {
   const endpoint = 'all';
-  const fields = ['alpha3Code', 'name'];
+  const params = {
+    fields: ['alpha3Code', 'name'],
+  };
 
   const url = new URL(endpoint, BASE_URL);
-  url.searchParams.append('fields', fields.join(','));
-  const { data, status } = await axios.get<CountryInfoBrief[]>(url.href, { headers });
+  const { data, status } = await axios.get<CountryInfoBrief[]>(url.href, { params, headers });
 
   if (status !== 200) {
     throw new Error(`${status}`);
