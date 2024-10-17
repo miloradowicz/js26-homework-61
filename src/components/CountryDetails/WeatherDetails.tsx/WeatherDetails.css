@@ -1,0 +1,8 @@
+.weather-description {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding-right: 50px;
+    background-repeat: no-repeat;
+    background-position: top -10px right;
+}
